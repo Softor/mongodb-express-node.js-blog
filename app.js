@@ -34,18 +34,15 @@ var articleProvider = new ArticleProvider('localhost', 27017);
 app.get('/', function(req, res){
     articleProvider.findAll( function(error,docs){
         res.render('index', { 
-            locals: {
-                title: 'a simple blog',
-                articles:docs
-            }
+			title: 'a simple blog',
+	        articles:docs
         });
     })
 });
 
 app.get('/blog/new', function(req, res) {
-    res.render('blog_new', { locals: {
+    res.render('blog_new', {
         title: 'new post'
-    }
     });
 });
 
@@ -61,10 +58,9 @@ app.post('/blog/new', function(req, res){
 app.get('/blog/:id', function(req, res) {
     articleProvider.findById(req.params.id, function(error, article) {
         res.render('blog_show',
-        { locals: {
+        {
             title: article.title,
             article: article
-        }
         });
     });
 });
@@ -73,10 +69,9 @@ app.get('/blog/:id', function(req, res) {
 app.get('/blog/:id/edit', function(req, res) {
 	articleProvider.findById(req.param('_id'), function(error, article) {
 		res.render('blog_edit',
-		{ locals: {
+		{
 			title: article.title,
 			article: article
-		}
 		});
 	});
 });
